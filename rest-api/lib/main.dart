@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -9,8 +10,9 @@ Future<http.Response> fetchAlbumResponse() {
 }
 
 Future<Album> fetchAlbum() async {
-  final response =
-      await http.get('https://jsonplaceholder.typicode.com/albums/1');
+  final response = await http.get(
+      'https://jsonplaceholder.typicode.com/albums/1',
+      headers: {HttpHeaders.authorizationHeader: 'Basic api_token_here'});
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
